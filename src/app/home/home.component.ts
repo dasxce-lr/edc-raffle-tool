@@ -1822,11 +1822,11 @@ export class HomeComponent implements OnInit {
                     this.updateNumberOfSlots(newRaffleFormData.numSlots);
                   }
 
-                  this.setSubredditSettings(submission.subreddit);
-
                   this.loadRaffleStorage(submission.name, this.userId).then(() => {
                     this.auditRaffle();
                   });
+
+                  this.setSubredditSettings(submission.subreddit);
 
                   this.startCommentPmTimer();
 
@@ -1962,6 +1962,10 @@ export class HomeComponent implements OnInit {
   }
 
   private setSubredditSettings(subreddit: string) {
+    if (subreddit === 'lego_raffles' || subreddit === 'PokemonRaffles') {
+      this.raffleProperties.willSendParticipantPm = false;
+      this.updateRaffleProperties();
+    }
     this.databaseService.getSubredditSettings(subreddit).subscribe(
       (subredditSettings) => {
         if (subredditSettings) {

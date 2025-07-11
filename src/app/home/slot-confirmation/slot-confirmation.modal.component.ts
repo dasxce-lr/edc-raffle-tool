@@ -111,6 +111,9 @@ export class SlotConfirmationModalComponent
       this.isCommentFromBlobAndHisBoy = this.context.comment.data.author === 'BlobAndHisBoy';
       if (this.context.numOpenSlots > 0 || this.context.inOrderMode) {
         if (!this.isDonationComment) {
+          this.confirmationMessageText += ['lego_raffles', 'PokemonRaffles'].includes(this.context.comment.data.subreddit)
+            ? 'We will no longer send and accept payment private messages. To inform me you\'ve paid for your spots, please reply to **this comment** with the **App** (e.g., Paypal, Venmo) you used and your **First and Last name initials** AFTER you\’ve paid. E.g., "Paypal AB"\n\n'
+            : '';
           this.confirmationMessageText = 'You got {' + this.context.comment.data.author + '_ALL_SLOTS}';
         } else {
           this.confirmationMessageText = 'BlobAndHisBoy got {BlobAndHisBoy_ALL_SLOTS}';
@@ -137,10 +140,22 @@ export class SlotConfirmationModalComponent
         }
         if (this.context.numOpenSlots > 0 || this.context.inOrderMode) {
           this.confirmationMessageText += ['lego_raffles', 'PokemonRaffles'].includes(this.context.comment.data.subreddit)
-            ? '\n\n**Do not put any comments in your payment message or you will be permanently banned.** If comments are required, you should put "." or 🍕 or ☕️. Contact the host for any questions or other comment.'
+            ? '\n\nPlease follow these instructions now:'
             : '';
           this.confirmationMessageText += ['lego_raffles', 'PokemonRaffles'].includes(this.context.comment.data.subreddit)
-            ? '\n\nIf you requested a specifc spot and that spot is already assigned to someone else, then a random spot will be assigned by default. If you do not want random spots in such cases, your request must explicitly asks for no substitutions.'
+            ? '\n\n1. Send payment for your spots using the link in the raffle description. Put an **empty comment** or "." or 🍕 or ☕️  in your payment message, and be sure to send as **Friends & Family** (if applicable). **Do NOT use any other comments or payment type.** If there is no link, wait until the raffle is 50% full or message the host.'
+            : '';
+          this.confirmationMessageText += ['lego_raffles', 'PokemonRaffles'].includes(this.context.comment.data.subreddit)
+            ? '\n\n2. After payment, reply to **this comment** with the **App** (e.g., Paypal, Venmo) you used and your **First and Last name initials** AFTER you’ve paid. E.g., "Paypal AB"'
+            : '';
+          this.confirmationMessageText += ['lego_raffles', 'PokemonRaffles'].includes(this.context.comment.data.subreddit)
+            ? '\n\n3. If you requested a specific spot that is already assigned to someone else, then a random spot will be assigned. If you do not want random spots, your request must explicitly ask for **"no substitutions" (or "no subs")**.'
+            : '';
+          this.confirmationMessageText += ['lego_raffles', 'PokemonRaffles'].includes(this.context.comment.data.subreddit)
+            ? '\n\n4. If you violate these terms, your spots will be removed, and you may be permanently banned from the subreddit.'
+            : '';
+          this.confirmationMessageText += ['lego_raffles', 'PokemonRaffles'].includes(this.context.comment.data.subreddit)
+            ? '\n\nPlease contact the host or the sub moderators for any questions about the raffle.'
             : '';
           this.confirmationMessageText += ['WatchURaffle', 'raffleTest2'].includes(this.context.comment.data.subreddit)
             ? '\n\n**Do not include any comments with your payment or you will be permanently banned.**'
@@ -149,10 +164,10 @@ export class SlotConfirmationModalComponent
             this.confirmationMessageText +=
               '\n\nIf you do not receive an automated PM from me,  then you can confirm your payment **only after you have paid** by filling in and sending [this PM]({PAYMENT_MESSAGE_LINK}). If the prior link doesn\'t work then try [this one]({IOS_PAYMENT_MESSAGE_LINK}).';
             this.confirmationMessageText += ['lego_raffles'].includes(this.context.comment.data.subreddit)
-              ? '\n\nThe Lego_Raffles subreddit has a Discord! Join us using this [link](https://discord.gg/legoraffles) to chat and trade!'
+              ? '\n\nLastly, we have a [Discord](https://discord.gg/legoraffles)! Join us to chat, trade, and play mini-games for free raffle spots!'
 	      : '';
             this.confirmationMessageText += ['PokemonRaffles'].includes(this.context.comment.data.subreddit)
-	      ? '\n\nThe PokemonRaffles subreddit has a Discord! Join us using this [link](https://discord.gg/JW8z4BpMga) to chat, trade, and play some mini-games!'
+	      ? '\n\nLastly, we have a [Discord](https://discord.gg/JW8z4BpMga)! Join us to chat, trade, and play mini-games for free raffle spots!'
 	      : '';
           }
         }
